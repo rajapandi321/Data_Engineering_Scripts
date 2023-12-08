@@ -1,4 +1,5 @@
 import snowflake.connector
+from pyspark import SparkSession
 
 # Establishing connection parameters
 conn = snowflake.connector.connect(
@@ -23,6 +24,8 @@ cur.execute('create table if not exists student(id int,name varchar(20),mark int
 cur.execute("insert into student values(1,'Raja',56)")
 cur.execute('select * from student')
 rows = cur.fetchall()
+
+#Pyspark code implementation
 
 for row in rows:
     print(row)
