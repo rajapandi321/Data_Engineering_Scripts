@@ -19,7 +19,9 @@ cur.execute("USE DATABASE SNOWFLAKE_PYTHON")
 cur.execute("USE SCHEMA PUBLIC")
 
 # Execute your query
-cur.execute('create table student(id int,name varchar(20),mark int)')
+cur.execute('create table if not exists student(id int,name varchar(20),mark int)')
+cur.execute("insert into student values(1,'Raja',56)")
+cur.execute('select * from student')
 rows = cur.fetchall()
 
 for row in rows:
