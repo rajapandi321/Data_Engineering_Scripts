@@ -1,0 +1,21 @@
+from pyspark.sql import SparkSession
+
+# Create a SparkSession
+spark = SparkSession.builder.appName("SQLServerRead").getOrCreate()
+
+# SQL Server connection properties
+url = "jdbc:sqlserver://azurebidemo.database.windows.net:1433;databaseName=Warehouse"
+properties = {
+    "user": "azurebidemo",
+    "password": "India123",
+    "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+}
+
+# Read data from SQL Server table
+table_name = "Customer"
+df = spark.read.jdbc(url=url, table=table_name, properties=properties)
+
+# Show the DataFrame
+df.show()
+
+df.write.jdbc(url=url, table=table_name, mode = 'overwrite', properties=properties)
